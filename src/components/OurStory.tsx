@@ -1,49 +1,52 @@
 import { motion } from "motion/react";
 import { Milestone } from "../types";
 import { Heart, Stars } from "lucide-react";
+import { useLanguage } from "../hooks/useLanguage";
 
 export default function OurStory() {
+  const { t, lang } = useLanguage();
+
   const milestones: Milestone[] = [
     {
       id: "1",
-      date: "14 de Febrero de 2021",
-      title: "El Comienzo de Todo",
-      text: "Aquel primer café donde una mirada tímida se convirtió en una conversación de horas. Había algo mágico en el ambiente, una conexión inexplicable. Ese día supimos que nuestras vidas cambiarían para siempre y que empezábamos a escribir nuestro propio destino.",
+      date: lang === "es" ? "14 de Febrero de 2021" : "February 14, 2021",
+      title: t("our_story.milestone_1_title"),
+      text: t("our_story.milestone_1_text"),
       imageUrl: "https://res.cloudinary.com/dcnynnstm/image/upload/v1780968212/01_ymkvet.jpg",
     },
     {
       id: "2",
-      date: "22 de Julio de 2022",
-      title: "Aventuras de Dos",
-      text: "Viajes espontáneos, atardeceres contemplados en silencio y risas descontroladas compartidas bajo la lluvia. Cada kilómetro recorrido, cada melodía descubierta y cada obstáculo superado consolidó un amor maduro, lleno de complicidad y confianza mutua.",
+      date: lang === "es" ? "22 de Julio de 2022" : "July 22, 2022",
+      title: t("our_story.milestone_2_title"),
+      text: t("our_story.milestone_2_text"),
       imageUrl: "https://res.cloudinary.com/dcnynnstm/image/upload/v1780968214/04_jafhgb.jpg",
     },
     {
       id: "3",
-      date: "11 de Noviembre de 2023",
-      title: "Nuestra Complicidad",
-      text: "En los días ordinarios también encontramos magia. El café de las mañanas, el apoyo incondicional en los momentos de cansancio y el refugio cálido de nuestros abrazos nos demostraron que el amor real se construye en los pequeños detalles que hacen la vida hermosa.",
+      date: lang === "es" ? "11 de Noviembre de 2023" : "November 11, 2023",
+      title: t("our_story.milestone_3_title"),
+      text: t("our_story.milestone_3_text"),
       imageUrl: "https://res.cloudinary.com/dcnynnstm/image/upload/v1780968214/05_nxuzj3.jpg",
     },
     {
       id: "4",
-      date: "25 de Diciembre de 2024",
-      title: "La Propuesta",
-      text: "Con el corazón latiendo acelerado y bajo un cielo estrellado y luces de colores navideñas, llegó la pregunta más importante y deseada de nuestras vidas. Un 'SÍ, ACEPTO' que resonó como una hermosa melodía que selló nuestra promesa eterna frente al mundo.",
+      date: lang === "es" ? "25 de Diciembre de 2024" : "December 25, 2024",
+      title: t("our_story.milestone_4_title"),
+      text: t("our_story.milestone_4_text"),
       imageUrl: "https://res.cloudinary.com/dcnynnstm/image/upload/v1780968205/06_po8nhb.jpg",
     },
     {
       id: "5",
-      date: "30 de Junio de 2025",
-      title: "Preparando el Gran Día",
-      text: "Entre preparativos, decisiones compartidas e ilusiones desbordantes, construimos día a día el inicio de lo que será nuestro hogar. Cada detalle es pensado para celebrar nuestra unión en compañía de las personas que más amamos y respetamos en esta vida.",
+      date: lang === "es" ? "30 de Junio de 2025" : "June 30, 2025",
+      title: t("our_story.milestone_5_title"),
+      text: t("our_story.milestone_5_text"),
       imageUrl: "https://res.cloudinary.com/dcnynnstm/image/upload/v1780968205/08_tritav.jpg",
     },
     {
       id: "6",
-      date: "05 de Septiembre de 2026",
-      title: "Nuestro 'Para Siempre'",
-      text: "El inicio formal de nuestra unión matrimonial. Frente a Dios y a nuestros seres queridos, sellamos una alianza sagrada guiada por la fe, el respeto y la devoción eterna. Este paso es la cumbre de nuestra valiosa historia de amor y el amanecer de una nueva vida.",
+      date: lang === "es" ? "05 de Septiembre de 2026" : "September 05, 2026",
+      title: t("our_story.milestone_6_title"),
+      text: t("our_story.milestone_6_text"),
       imageUrl: "https://res.cloudinary.com/dcnynnstm/image/upload/v1780968206/10_cuonxy.jpg",
     },
   ];
@@ -66,14 +69,14 @@ export default function OurStory() {
           >
             <Heart className="w-5 h-5 text-[#C5A059] mb-4" />
             <span className="font-sans text-xs tracking-[0.3em] text-[#8A9A5B] uppercase font-bold">
-              Nuestra Historia
+              {t("our_story.label")}
             </span>
             <h2 className="font-serif text-3xl sm:text-5xl text-[#333] tracking-wide font-light mt-3 mb-4">
-              El Camino Hacia el "Sí"
+              {t("our_story.title")}
             </h2>
             <div className="w-16 h-[1px] bg-[#D4AF37]" />
             <p className="text-[#777] text-sm font-light italic mt-6 max-w-lg">
-              "Cada momento vivido nos trajo hasta aquí, y cada latido afirma que fuiste, eres y siempre serás tú."
+              {t("our_story.quote")}
             </p>
           </motion.div>
         </div>

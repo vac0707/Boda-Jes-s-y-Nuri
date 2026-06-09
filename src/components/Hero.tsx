@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { ChevronDown } from "lucide-react";
+import { useLanguage } from "../hooks/useLanguage";
 
 export default function Hero() {
+  const { t, lang } = useLanguage();
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
@@ -50,7 +52,7 @@ export default function Hero() {
             transition={{ duration: 0.8 }}
             className="text-[#D4AF37] tracking-[0.3em] uppercase text-xs mb-3 font-semibold italic"
           >
-            Nuestra Unión
+            {t("welcome_screen.union")}
           </motion.p>
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
@@ -76,7 +78,9 @@ export default function Hero() {
             transition={{ duration: 1, delay: 0.5 }}
             className="text-white/80 text-sm lg:text-lg font-light tracking-wide max-w-sm"
           >
-            "El amor nos encontró y decidió quedarse para siempre."
+            {lang === "es" 
+              ? '"El amor nos encontró y decidió quedarse para siempre."'
+              : '"Love found us and decided to stay forever."'}
           </motion.p>
         </div>
       </div>
@@ -88,15 +92,27 @@ export default function Hero() {
         <div className="p-8 lg:p-12 flex flex-col justify-center border-b border-[#E5E1D8] bg-[#FAF9F6] h-1/3">
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end mb-6 gap-4">
             <div>
-              <p className="text-xs uppercase tracking-[0.2em] text-[#8A9A5B] font-bold mb-2">Cuándo</p>
-              <p className="font-serif text-2xl lg:text-3xl text-[#333]">05 de Septiembre, 2026</p>
-              <p className="text-sm text-[#777]">Sábado • 12:00 PM</p>
+              <p className="text-xs uppercase tracking-[0.2em] text-[#8A9A5B] font-bold mb-2">
+                {lang === "es" ? "Cuándo" : "When"}
+              </p>
+              <p className="font-serif text-2xl lg:text-3xl text-[#333]">
+                {lang === "es" ? "05 de Septiembre, 2026" : "September 05, 2026"}
+              </p>
+              <p className="text-sm text-[#777]">
+                {lang === "es" ? "Sábado • 12:00 PM" : "Saturday • 12:00 PM"}
+              </p>
             </div>
             
             <div className="text-left sm:text-right">
-              <p className="text-xs uppercase tracking-[0.2em] text-[#C5A059] font-bold mb-2">Lugar</p>
-              <p className="font-serif text-2xl lg:text-3xl text-[#333]">Arequipa, Perú</p>
-              <p className="text-sm text-[#777]">Ciudad Blanca</p>
+              <p className="text-xs uppercase tracking-[0.2em] text-[#C5A059] font-bold mb-2">
+                {lang === "es" ? "Lugar" : "Location"}
+              </p>
+              <p className="font-serif text-2xl lg:text-3xl text-[#333]">
+                Arequipa, {lang === "es" ? "Perú" : "Peru"}
+              </p>
+              <p className="text-sm text-[#777]">
+                {lang === "es" ? "Ciudad Blanca" : "White City"}
+              </p>
             </div>
           </div>
           
@@ -107,7 +123,9 @@ export default function Hero() {
                 <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]"></div>
               </div>
               <div>
-                <p className="text-[10px] uppercase tracking-wider text-[#8A9A5B] font-bold">Ceremonia</p>
+                <p className="text-[10px] uppercase tracking-wider text-[#8A9A5B] font-bold">
+                  {lang === "es" ? "Ceremonia" : "Ceremony"}
+                </p>
                 <p className="text-xs font-semibold text-[#555] leading-tight">Parroquia Santísima Cruz</p>
               </div>
             </div>
@@ -116,7 +134,9 @@ export default function Hero() {
                 <div className="w-1.5 h-1.5 rounded-full bg-[#C5A059]"></div>
               </div>
               <div>
-                <p className="text-[10px] uppercase tracking-wider text-[#8A9A5B] font-bold">Recepción</p>
+                <p className="text-[10px] uppercase tracking-wider text-[#8A9A5B] font-bold">
+                  {lang === "es" ? "Recepción" : "Reception"}
+                </p>
                 <p className="text-xs font-semibold text-[#555] leading-tight">Casa Babilonia</p>
               </div>
             </div>
@@ -137,15 +157,19 @@ export default function Hero() {
               onClick={() => scrollToSection("nuestra-historia")}
             />
             <div className="ml-2 lg:ml-4">
-              <p className="font-serif italic text-[#C5A059] text-base lg:text-xl mb-1">Nuestra Historia</p>
+              <p className="font-serif italic text-[#C5A059] text-base lg:text-xl mb-1">
+                {t("our_story.label")}
+              </p>
               <p className="text-[10px] lg:text-xs leading-relaxed text-[#555] max-w-[190px]">
-                Un recorrido visual por los momentos mágicos que nos trajeron hasta aquí.
+                {lang === "es" 
+                  ? "Un recorrido visual por los momentos mágicos que nos trajeron hasta aquí." 
+                  : "A visual journey through the magical moments that brought us here."}
               </p>
               <button 
                 onClick={() => scrollToSection("nuestra-historia")}
                 className="mt-2 lg:mt-3 text-[10px] uppercase tracking-widest font-bold border-b border-[#D4AF37] pb-1 cursor-pointer transition-colors hover:text-[#C5A059]"
               >
-                Ver línea de tiempo
+                {lang === "es" ? "Ver línea de tiempo" : "View timeline"}
               </button>
             </div>
           </div>
@@ -155,8 +179,12 @@ export default function Hero() {
         <div className="p-8 lg:p-12 flex flex-col justify-between bg-[#FAF9F6] gap-6 h-1/3">
           <div className="bg-white border border-[#E5E1D8] p-5 flex items-center justify-between shadow-sm rounded-sm">
             <div>
-              <p className="text-[10px] lg:text-xs font-bold uppercase tracking-widest text-[#8A9A5B]">Código de Vestimenta</p>
-              <p className="text-xs lg:text-sm italic font-serif text-[#555]">Formal / White Tie</p>
+              <p className="text-[10px] lg:text-xs font-bold uppercase tracking-widest text-[#8A9A5B]">
+                {t("dress_code.title")}
+              </p>
+              <p className="text-xs lg:text-sm italic font-serif text-[#555]">
+                {lang === "es" ? "Formal / Traje de Gala" : "Black Tie / Formal"}
+              </p>
             </div>
             
             <div className="h-10 w-[1px] bg-[#E5E1D8]" />
@@ -166,7 +194,7 @@ export default function Hero() {
                 onClick={() => scrollToSection("confirmacion")}
                 className="bg-[#C5A059] text-white px-4 lg:px-8 py-3 rounded-sm text-[10px] lg:text-xs font-bold uppercase tracking-widest shadow-md hover:bg-[#B49048] transition-colors cursor-pointer"
               >
-                Asistir
+                {lang === "es" ? "Asistir" : "Attend"}
               </button>
             </div>
           </div>
@@ -177,7 +205,7 @@ export default function Hero() {
               <span className="px-2 py-0.5 bg-[#F1EFE9] border border-[#E5E1D8]/40 rounded-sm font-semibold text-[#C5A059]">AREQUIPA</span>
             </div>
             <p className="uppercase tracking-widest text-right leading-relaxed">
-              J&N • Arequipa, Perú
+              J&N • Arequipa, {lang === "es" ? "Perú" : "Peru"}
             </p>
           </div>
         </div>

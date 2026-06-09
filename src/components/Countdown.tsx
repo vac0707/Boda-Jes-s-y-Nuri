@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { CountdownTime } from "../types";
 import { Calendar } from "lucide-react";
+import { useLanguage } from "../hooks/useLanguage";
 
 export default function Countdown() {
+  const { t, lang } = useLanguage();
   const targetDate = new Date("2026-09-05T12:00:00").getTime();
 
   const [timeLeft, setTimeLeft] = useState<CountdownTime>({
@@ -67,10 +69,10 @@ export default function Countdown() {
         >
           <Calendar className="w-6 h-6 text-gold-500 mb-4 animate-pulse" />
           <h3 className="font-serif text-3xl sm:text-4xl text-sage-900 tracking-wide font-light mb-3">
-            Cada Segundo Nos Acerca Más
+            {t("countdown.title")}
           </h3>
           <p className="text-sm font-light text-sage-600 tracking-widest max-w-md uppercase">
-            Acompáñanos a iniciar la cuenta regresiva para nuestro gran día
+            {t("countdown.subtitle")}
           </p>
         </motion.div>
 
@@ -81,10 +83,10 @@ export default function Countdown() {
             className="bg-white border border-[#E5E1D8] rounded-sm py-10 px-8 max-w-xl mx-auto shadow-sm"
           >
             <p className="font-serif text-2xl text-[#C5A059] tracking-wider">
-              ¡LLEGÓ EL GRAN DÍA!
+              {t("countdown.completed_title")}
             </p>
             <p className="text-[#333] text-sm font-light mt-2 uppercase tracking-wide">
-              Hoy celebramos nuestro amor infinito
+              {t("countdown.completed_subtitle")}
             </p>
           </motion.div>
         ) : (
@@ -103,7 +105,7 @@ export default function Countdown() {
                 {padZero(timeLeft.days)}
               </span>
               <span className="text-[10px] sm:text-xs text-[#8A9A5B] tracking-[0.2em] font-bold uppercase">
-                Días
+                {t("countdown.days")}
               </span>
             </motion.div>
  
@@ -121,7 +123,7 @@ export default function Countdown() {
                 {padZero(timeLeft.hours)}
               </span>
               <span className="text-[10px] sm:text-xs text-[#8A9A5B] tracking-[0.2em] font-bold uppercase">
-                Horas
+                {t("countdown.hours")}
               </span>
             </motion.div>
  
@@ -139,7 +141,7 @@ export default function Countdown() {
                 {padZero(timeLeft.minutes)}
               </span>
               <span className="text-[10px] sm:text-xs text-[#8A9A5B] tracking-[0.2em] font-bold uppercase">
-                Minutos
+                {t("countdown.minutes")}
               </span>
             </motion.div>
  
@@ -157,7 +159,7 @@ export default function Countdown() {
                 {padZero(timeLeft.seconds)}
               </span>
               <span className="text-[10px] sm:text-xs text-[#8A9A5B] tracking-[0.2em] font-bold uppercase">
-                Segundos
+                {t("countdown.seconds")}
               </span>
             </motion.div>
           </div>
@@ -177,10 +179,10 @@ export default function Countdown() {
           {/* Month Header */}
           <div className="text-center mb-6">
             <span className="font-sans text-[10px] tracking-[0.25em] text-[#8A9A5B] font-bold uppercase block mb-1">
-              Guarda la Fecha
+              {t("countdown.save_the_date")}
             </span>
             <h4 className="font-serif text-xl text-[#333] tracking-[0.15em] font-light uppercase">
-              Septiembre 2026
+              {t("countdown.month_year")}
             </h4>
             <div className="w-12 h-[1px] bg-[#D4AF37] mx-auto mt-2" />
           </div>
@@ -188,7 +190,7 @@ export default function Countdown() {
           {/* Calendar Grid */}
           <div className="grid grid-cols-7 gap-1 text-center">
             {/* Weekdays Header */}
-            {["D", "L", "M", "M", "J", "V", "S"].map((day, idx) => (
+            {(lang === "es" ? ["D", "L", "M", "M", "J", "V", "S"] : ["S", "M", "T", "W", "T", "F", "S"]).map((day, idx) => (
               <span
                 key={idx}
                 className="text-[10px] uppercase tracking-wider font-bold text-[#8A9A5B] pb-2 font-mono"
@@ -248,7 +250,9 @@ export default function Countdown() {
 
                     <div className="relative z-10 flex flex-col items-center justify-center text-white">
                       <span className="text-xs font-bold leading-none select-none">5</span>
-                      <span className="text-[7px] font-bold tracking-tighter uppercase leading-none select-none mt-0.5 opacity-90">Boda</span>
+                      <span className="text-[7px] font-bold tracking-tighter uppercase leading-none select-none mt-0.5 opacity-90">
+                        {t("countdown.wedding_day_label")}
+                      </span>
                     </div>
                   </div>
                 );
@@ -268,10 +272,10 @@ export default function Countdown() {
           {/* Calendar Footer Info */}
           <div className="mt-6 pt-4 border-t border-[#E5E1D8]/50 text-center">
             <p className="text-xs font-light tracking-wide text-[#333]">
-              Sábado, 5 de Septiembre • 12:00 PM
+              {lang === "es" ? "Sábado, 5 de Septiembre • 12:00 PM" : "Saturday, September 5 • 12:00 PM"}
             </p>
             <p className="text-[10px] text-[#8A9A5B] uppercase tracking-[0.2em] font-bold mt-1">
-              Cayma, Arequipa, Perú
+              {t("countdown.cayma")}
             </p>
           </div>
         </motion.div>

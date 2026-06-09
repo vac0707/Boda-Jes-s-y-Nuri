@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { motion } from "motion/react";
 import { MessageSquarePlus, Milestone, HelpCircle, CheckCircle2 } from "lucide-react";
+import { useLanguage } from "../hooks/useLanguage";
 
 export default function RSVPForm() {
+  const { t, lang } = useLanguage();
   const [formData, setFormData] = useState({
     nombre: "",
     asistentes: "1",
@@ -23,10 +25,12 @@ export default function RSVPForm() {
 
     if (!formData.nombre.trim()) return;
 
-    // Formatting the message template for luxurious delivery on WhatsApp
-    const message = `¡Hola Jesús y Nuri! ✨💍\n\nConfirmo con mucha alegría mi asistencia a su hermosa boda este 05 de septiembre.\n\n*Detalles de Confirmación:*\n👤 *Nombre:* ${formData.nombre.trim()}\n👥 *Asistentes:* ${formData.asistentes}\n✉️ *Mensaje Especial:* "${formData.mensaje.trim() || '¡Muchas felicidades y bendiciones!'}"\n\n¡Nos vemos pronto para celebrar juntos! 🎉`;
+    // Formatting the message template for luxurious delivery on WhatsApp based on language
+    const msgTemplate = lang === "es"
+      ? `¡Hola Jesús y Nuri! ✨💍\n\nConfirmo con mucha alegría mi asistencia a su hermosa boda este 05 de septiembre.\n\n*Detalles de Confirmación:*\n👤 *Nombre:* ${formData.nombre.trim()}\n👥 *Asistentes:* ${formData.asistentes}\n✉️ *Mensaje Especial:* "${formData.mensaje.trim() || '¡Muchas felicidades y bendiciones!'}"\n\n¡Nos vemos pronto para celebrar juntos! 🎉`
+      : `Hello Jesús and Nuri! ✨💍\n\nI am very happy to confirm my assistance to your beautiful wedding this September 5th.\n\n*Confirmation Details:*\n👤 *Name:* ${formData.nombre.trim()}\n👥 *Guests:* ${formData.asistentes}\n✉️ *Special Message:* "${formData.mensaje.trim() || 'Congratulations and best wishes!'}"\n\nSee you soon to celebrate together! 🎉`;
 
-    const encodedText = encodeURIComponent(message);
+    const encodedText = encodeURIComponent(msgTemplate);
     const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNum}&text=${encodedText}`;
 
     // Mark as local success to provide visual triumph feedback!
@@ -52,14 +56,14 @@ export default function RSVPForm() {
           >
             <HelpCircle className="w-5 h-5 text-[#C5A059] mb-4" />
             <span className="font-sans text-xs tracking-[0.3em] text-[#8A9A5B] uppercase font-bold">
-              RSVP
+              {t("rsvp.label")}
             </span>
             <h2 className="font-serif text-3xl sm:text-5xl text-[#333] tracking-wide font-light mt-3 mb-4">
-              Confirmar Asistencia
+              {t("rsvp.title")}
             </h2>
             <div className="w-16 h-[1px] bg-[#D4AF37]" />
             <p className="text-[#777] text-sm font-light mt-4 max-w-sm">
-              Por favor, infórmanos de tu asistencia antes del <strong>20 de agosto de 2026</strong> para coordinar cada detalle de la recepción.
+              {t("rsvp.subtitle")}
             </p>
           </motion.div>
         </div>
@@ -85,16 +89,16 @@ export default function RSVPForm() {
                 <CheckCircle2 className="w-8 h-8 text-[#C5A059]" />
               </div>
               <h3 className="font-serif text-2xl text-[#333] font-light mb-3">
-                ¡Confirmación Enviada!
+                {t("rsvp.success_title")}
               </h3>
               <p className="text-[#555] text-xs sm:text-sm font-light max-w-xs leading-relaxed mb-6">
-                Hemos generado tu mensaje y abierto WhatsApp. Si la pestaña no cargó automáticamente, haz clic en el botón de abajo.
+                {t("rsvp.success_desc")}
               </p>
               <button
                 onClick={() => setIsSuccess(false)}
                 className="text-xs uppercase tracking-widest font-bold border border-[#E5E1D8] text-[#555] bg-transparent hover:bg-[#F1EFE9] px-6 py-3 rounded-sm transition-all cursor-pointer"
               >
-                Volver a enviar
+                {t("rsvp.btn_back")}
               </button>
             </motion.div>
           ) : (
@@ -102,7 +106,7 @@ export default function RSVPForm() {
               {/* Field 1: Name */}
               <div>
                 <label htmlFor="nombre" className="block text-[10px] uppercase tracking-[0.2em] font-bold text-[#8A9A5B] mb-2">
-                  Nombre Completo
+                  {t("rsvp.label_name")}
                 </label>
                 <input
                   type="text"
@@ -111,7 +115,7 @@ export default function RSVPForm() {
                   value={formData.nombre}
                   onChange={handleChange}
                   required
-                  placeholder="Ej: Sr. y Sra. Ramírez Bravo"
+                  placeholder={t("rsvp.placeholder_name")}
                   className="w-full px-5 py-3.5 rounded-sm border border-[#E5E1D8] bg-[#FAF9F6] focus:bg-white text-[#333] text-sm font-light select-text outline-none transition-all focus:border-[#D4AF37] focus:ring-0"
                 />
               </div>
@@ -119,7 +123,7 @@ export default function RSVPForm() {
               {/* Field 2: Comps count */}
               <div>
                 <label htmlFor="asistentes" className="block text-[10px] uppercase tracking-[0.2em] font-bold text-[#8A9A5B] mb-2">
-                  Cantidad de Invitados (Pases)
+                  {t("rsvp.label_guests")}
                 </label>
                 <div className="relative">
                   <select
@@ -129,11 +133,11 @@ export default function RSVPForm() {
                     onChange={handleChange}
                     className="w-full px-5 py-3.5 rounded-sm border border-[#E5E1D8] bg-[#FAF9F6] focus:bg-white text-[#333] text-sm font-light outline-none transition-all cursor-pointer focus:border-[#D4AF37] focus:ring-0 appearance-none"
                   >
-                    <option value="1">1 Persona (Pase Individual)</option>
-                    <option value="2">2 Personas (Pase de Pareja)</option>
-                    <option value="3">3 Personas (Familiar)</option>
-                    <option value="4">4 Personas (Familiar)</option>
-                    <option value="5">5 Personas (Mesa Reservada)</option>
+                    <option value="1">{t("rsvp.option_1")}</option>
+                    <option value="2">{t("rsvp.option_2")}</option>
+                    <option value="3">{t("rsvp.option_3")}</option>
+                    <option value="4">{t("rsvp.option_4")}</option>
+                    <option value="5">{t("rsvp.option_5")}</option>
                   </select>
                   {/* Custom select arrow overlay */}
                   <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-[#C5A059]">
@@ -145,7 +149,7 @@ export default function RSVPForm() {
               {/* Field 3: Custom message */}
               <div>
                 <label htmlFor="mensaje" className="block text-[10px] uppercase tracking-[0.2em] font-bold text-[#8A9A5B] mb-2">
-                  Mensaje o Dedicatoria Especial
+                  {t("rsvp.label_message")}
                 </label>
                 <textarea
                   id="mensaje"
@@ -153,7 +157,7 @@ export default function RSVPForm() {
                   value={formData.mensaje}
                   onChange={handleChange}
                   rows={3}
-                  placeholder="Déjales un lindo mensaje o bendición..."
+                  placeholder={t("rsvp.placeholder_message")}
                   className="w-full px-5 py-3.5 rounded-sm border border-[#E5E1D8] bg-[#FAF9F6] focus:bg-white text-[#333] text-sm font-light select-text outline-none transition-all focus:border-[#D4AF37] focus:ring-0 resize-none"
                 />
               </div>
@@ -164,7 +168,7 @@ export default function RSVPForm() {
                 className="w-full py-4 rounded-sm font-sans text-xs tracking-[0.2em] uppercase font-bold text-white bg-[#C5A059] hover:bg-[#B49048] border border-[#D4AF37]/35 transition-all duration-300 cursor-pointer flex items-center justify-center gap-3 shadow-md"
               >
                 <MessageSquarePlus className="w-4 h-4" />
-                <span>Confirmar por WhatsApp</span>
+                <span>{t("rsvp.btn_send")}</span>
               </button>
             </form>
           )}

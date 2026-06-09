@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { MessageSquareDot } from "lucide-react";
+import { useLanguage } from "../hooks/useLanguage";
 
 interface FloatingProps {
   systemUnlocked: boolean;
 }
 
 export default function FloatingWhatsapp({ systemUnlocked }: FloatingProps) {
+  const { lang } = useLanguage();
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -22,7 +24,9 @@ export default function FloatingWhatsapp({ systemUnlocked }: FloatingProps) {
   if (!systemUnlocked || !isVisible) return null;
 
   const phoneNum = "51926263277";
-  const defaultText = "¡Hola Jesús y Nuri! 💍✨ Acabo de abrir su espectacular invitación virtual. ¡Qué emoción compartir con ustedes este gran acontecimiento!";
+  const defaultText = lang === "es"
+    ? "¡Hola Jesús y Nuri! 💍✨ Acabo de abrir su espectacular invitación virtual. ¡Qué emoción compartir con ustedes este gran acontecimiento!"
+    : "Hello Jesús and Nuri! 💍✨ I just opened your spectacular virtual invitation. How exciting to share this great journey with you!";
   const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNum}&text=${encodeURIComponent(defaultText)}`;
 
   return (
@@ -34,7 +38,7 @@ export default function FloatingWhatsapp({ systemUnlocked }: FloatingProps) {
         rel="noopener noreferrer"
         className="relative group flex items-center justify-center p-3.5 rounded-full border border-emerald-400 bg-emerald-600 hover:bg-emerald-500 text-white shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 animate-bounce cursor-pointer hover:border-emerald-300"
         style={{ animationDuration: "3s" }}
-        title="Consultas por WhatsApp"
+        title={lang === "es" ? "Consultas por WhatsApp" : "Inquiries via WhatsApp"}
       >
         {/* Radar Ring Glow Effect */}
         <span className="absolute inset-0 rounded-full bg-emerald-500/35 animate-ping opacity-60 pointer-events-none" />

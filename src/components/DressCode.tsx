@@ -1,7 +1,10 @@
 import { motion } from "motion/react";
 import { Sparkles } from "lucide-react";
+import { useLanguage } from "../hooks/useLanguage";
 
 export default function DressCode() {
+  const { t, lang } = useLanguage();
+
   return (
     <section id="codigo-vestimenta" className="relative py-28 px-6 bg-[#FAF9F6] overflow-hidden text-center">
       <div className="absolute top-0 inset-x-0 h-px bg-[#E5E1D8]" />
@@ -18,14 +21,14 @@ export default function DressCode() {
           >
             <Sparkles className="w-5 h-5 text-[#C5A059] mb-4" />
             <span className="font-sans text-xs tracking-[0.3em] text-[#8A9A5B] uppercase font-bold">
-              Etiqueta
+              {t("dress.label")}
             </span>
             <h2 className="font-serif text-3xl sm:text-5xl text-[#333] tracking-wide font-light mt-3 mb-4">
-              Código de Vestimenta
+              {t("dress.title")}
             </h2>
             <div className="w-16 h-[1px] bg-[#D4AF37]" />
             <p className="text-[#777] text-sm font-light mt-4 max-w-md">
-              Nos encantaría verlos lucir sus mejores galas para esta velada tan solemne y mágica.
+              {t("dress.subtitle")}
             </p>
           </motion.div>
         </div>
@@ -59,16 +62,16 @@ export default function DressCode() {
             </div>
 
             <h3 className="font-serif text-2xl text-[#333] font-normal tracking-wide mb-1">
-              Damas
+              {t("dress.ladies_title")}
             </h3>
             <span className="text-[10px] uppercase tracking-[0.25em] text-[#C5A059] font-bold mb-4">
-              Vestido Largo Formal
+              {t("dress.ladies_subtitle")}
             </span>
             <p className="text-[#555] text-xs sm:text-sm font-light leading-relaxed max-w-xs mb-6">
-              Agradecemos su asistencia luciendo un vestido largo formal. Estilos sofisticados en los colores que más les favorezcan.
+              {t("dress.ladies_desc")}
             </p>
             <span className="text-[10px] uppercase font-bold text-rose-700 bg-rose-50 border border-rose-100 px-3.5 py-1 rounded-sm tracking-wider mt-auto">
-              Evitar color Blanco / Marfil
+              {t("dress.ladies_avoid")}
             </span>
           </motion.div>
 
@@ -101,16 +104,16 @@ export default function DressCode() {
             </div>
 
             <h3 className="font-serif text-2xl text-[#333] font-normal tracking-wide mb-1">
-              Caballeros
+              {t("dress.gents_title")}
             </h3>
             <span className="text-[10px] uppercase tracking-[0.25em] text-[#C5A059] font-bold mb-4">
-              Traje Formal / Traje de Gala
+              {t("dress.gents_subtitle")}
             </span>
             <p className="text-[#555] text-xs sm:text-sm font-light leading-relaxed max-w-xs mb-6">
-              Uso de traje formal de colores oscuros o Smoking clásico. Camisa formal blanca y corbata o corbatín que resalte su porte.
+              {t("dress.gents_desc")}
             </p>
             <span className="text-[10px] uppercase font-bold text-[#8A9A5B] bg-[#F1EFE9] border border-[#E5E1D8]/30 px-3.5 py-1 rounded-sm tracking-wider mt-auto">
-              Smoking o Traje Oscuro
+              {t("dress.gents_avoid")}
             </span>
           </motion.div>
         </div>

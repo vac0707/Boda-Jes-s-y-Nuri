@@ -16,9 +16,11 @@ import RomanticQuote from "./components/RomanticQuote";
 import FloatingWhatsapp from "./components/FloatingWhatsapp";
 import FloatingLeaves from "./components/FloatingLeaves";
 import FooterRefined from "./components/FooterRefined";
+import { useLanguage } from "./hooks/useLanguage";
 
 export default function App() {
   const [unlocked, setUnlocked] = useState(false);
+  const { lang } = useLanguage();
 
   // Scroll restore on mount
   useEffect(() => {
@@ -79,7 +81,9 @@ export default function App() {
 
           {/* Separator Romantic Quote Panel 1 */}
           <RomanticQuote
-            quote="Dos almas con un solo pensamiento, dos corazones que laten como uno solo."
+            quote={lang === "es"
+              ? "Dos almas con un solo pensamiento, dos corazones que laten como uno solo."
+              : "Two souls with but a single thought, two hearts that beat as one."}
             author="Friedrich Halm"
             bgType="sage"
           />
@@ -92,7 +96,9 @@ export default function App() {
 
           {/* Separator Romantic Quote Panel 2 */}
           <RomanticQuote
-            quote="El amor nos encontró, decidió quedarse, y nosotros decidimos caminar de la mano para siempre."
+            quote={lang === "es"
+              ? "El amor nos encontró, decidió quedarse, y nosotros decidimos caminar de la mano para siempre."
+              : "Love found us, decided to stay, and we decided to walk hand in hand forever."}
             bgType="dark"
           />
 

@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { MapPin, CalendarPlus, Church, Compass, GlassWater, Landmark } from "lucide-react";
+import { useLanguage } from "../hooks/useLanguage";
 
 export default function EventsAndMaps() {
+  const { t, lang } = useLanguage();
   const [activeMap, setActiveMap] = useState<"iglesia" | "recepcion">("iglesia");
 
   const churchMapUrl = "https://maps.google.com/maps?q=Parroquia%20Sant%C3%ADsima%20Cruz%20de%20Acequia%20Alta,%20Cayma,%20Arequipa,%20Peru&t=&z=16&ie=UTF8&iwloc=&output=embed";
@@ -31,14 +33,14 @@ export default function EventsAndMaps() {
           >
             <Compass className="w-5 h-5 text-[#C5A059] mb-4 animate-spin" style={{ animationDuration: "12s" }} />
             <span className="font-sans text-xs tracking-[0.3em] text-[#8A9A5B] uppercase font-bold">
-              Detalles del Evento
+              {t("events.label")}
             </span>
             <h2 className="font-serif text-3xl sm:text-5xl text-[#333] tracking-wide font-light mt-3 mb-4">
-              Ubicación y Horario
+              {t("events.title")}
             </h2>
             <div className="w-16 h-[1px] bg-[#D4AF37]" />
             <p className="text-[#777] text-sm font-light mt-4 max-w-md">
-              Queremos que tu llegada sea súper sencilla. Encuentra aquí toda la información horaria y geográfica.
+              {t("events.subtitle")}
             </p>
           </motion.div>
         </div>
@@ -66,8 +68,10 @@ export default function EventsAndMaps() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none" />
               <div className="absolute bottom-4 left-6 text-white z-10">
-                <span className="text-[10px] uppercase tracking-[0.25em] text-[#D4AF37] font-semibold">Ubicación de Ceremonia</span>
-                <p className="font-serif text-lg font-light">Vista General</p>
+                <span className="text-[10px] uppercase tracking-[0.25em] text-[#D4AF37] font-semibold">
+                  {lang === "es" ? "Ubicación de Ceremonia" : "Ceremony Location"}
+                </span>
+                <p className="font-serif text-lg font-light">{lang === "es" ? "Vista General" : "General View"}</p>
               </div>
             </div>
 
@@ -80,24 +84,24 @@ export default function EventsAndMaps() {
                 </div>
 
                 <h3 className="font-serif text-2xl text-[#333] font-normal tracking-wide mb-1">
-                  Ceremonia Religiosa
+                  {t("events.ceremony_title")}
                 </h3>
                 <span className="text-[11px] uppercase tracking-[0.25em] text-[#C5A059] font-bold mb-6">
-                  El Voto Sagrado
+                  {t("events.ceremony_subtitle")}
                 </span>
 
                 {/* Ceremony Specs */}
                 <div className="space-y-4 mb-8 w-full border-t border-b border-[#E5E1D8] py-6 text-[#555]">
                   <p className="text-sm font-light">
-                    <strong className="block text-[#333] font-semibold tracking-wide">Hora:</strong>
+                    <strong className="block text-[#333] font-semibold tracking-wide">{lang === "es" ? "Hora:" : "Time:"}</strong>
                     12:00 PM
                   </p>
                   <p className="text-sm font-light">
-                    <strong className="block text-[#333] font-semibold tracking-wide">Lugar:</strong>
+                    <strong className="block text-[#333] font-semibold tracking-wide">{lang === "es" ? "Lugar:" : "Place:"}</strong>
                     Parroquia Santísima Cruz de Acequia Alta
                   </p>
                   <p className="text-xs font-semibold text-[#8A9A5B] uppercase tracking-wider px-4">
-                    Cayma, Arequipa, Perú
+                    {t("countdown.cayma")}
                   </p>
                 </div>
 
@@ -112,7 +116,7 @@ export default function EventsAndMaps() {
                     className="flex items-center gap-2 px-5 py-2.5 rounded-sm border border-[#E5E1D8] text-[#555] bg-transparent hover:bg-[#F1EFE9] transition-all text-xs font-semibold uppercase tracking-widest cursor-pointer"
                   >
                     <MapPin className="w-3.5 h-3.5 text-[#D4AF37]" />
-                    <span>Ver Mapa</span>
+                    <span>{lang === "es" ? "Ver Mapa" : "View Map"}</span>
                   </button>
 
                   {/* Google Calendar */}
@@ -123,7 +127,7 @@ export default function EventsAndMaps() {
                     className="flex items-center gap-2 px-5 py-2.5 rounded-sm bg-[#C5A059] hover:bg-[#B49048] text-white transition-all text-xs font-bold uppercase tracking-widest"
                   >
                     <CalendarPlus className="w-3.5 h-3.5" />
-                    <span>Calendario</span>
+                    <span>{lang === "es" ? "Calendario" : "Calendar"}</span>
                   </a>
                 </div>
               </div>
@@ -151,7 +155,9 @@ export default function EventsAndMaps() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none" />
               <div className="absolute bottom-4 left-6 text-white z-10">
-                <span className="text-[10px] uppercase tracking-[0.25em] text-[#8A9A5B] font-semibold">Ubicación de Recepción</span>
+                <span className="text-[10px] uppercase tracking-[0.25em] text-[#8A9A5B] font-semibold">
+                  {lang === "es" ? "Ubicación de Recepción" : "Reception Location"}
+                </span>
                 <p className="font-serif text-lg font-light">Casa Babilonia</p>
               </div>
             </div>
@@ -165,24 +171,24 @@ export default function EventsAndMaps() {
                 </div>
 
                 <h3 className="font-serif text-2xl text-[#333] font-normal tracking-wide mb-1">
-                  La Recepción
+                  {t("events.reception_title")}
                 </h3>
                 <span className="text-[11px] uppercase tracking-[0.25em] text-[#8A9A5B] font-bold mb-6">
-                  La Gran Celebración
+                  {t("events.reception_subtitle")}
                 </span>
 
                 {/* Reception Specs */}
                 <div className="space-y-4 mb-8 w-full border-t border-b border-[#E5E1D8] py-6 text-[#555]">
                   <p className="text-sm font-light">
-                    <strong className="block text-[#333] font-semibold tracking-wide">Hora:</strong>
-                    02:00 PM (Inmediatamente después del oficio)
+                    <strong className="block text-[#333] font-semibold tracking-wide">{lang === "es" ? "Hora:" : "Time:"}</strong>
+                    {lang === "es" ? "02:00 PM (Inmediatamente después del oficio)" : "02:00 PM (Immediately after ceremony)"}
                   </p>
                   <p className="text-sm font-light">
-                    <strong className="block text-[#333] font-semibold tracking-wide">Lugar:</strong>
+                    <strong className="block text-[#333] font-semibold tracking-wide">{lang === "es" ? "Lugar:" : "Place:"}</strong>
                     Casa Babilonia
                   </p>
                   <p className="text-xs font-semibold text-[#8A9A5B] uppercase tracking-wider px-4">
-                    Cayma, Arequipa, Perú
+                    {t("countdown.cayma")}
                   </p>
                 </div>
 
@@ -197,7 +203,7 @@ export default function EventsAndMaps() {
                     className="flex items-center gap-2 px-5 py-2.5 rounded-sm border border-[#E5E1D8] text-[#555] bg-transparent hover:bg-[#F1EFE9] transition-all text-xs font-semibold uppercase tracking-widest cursor-pointer"
                   >
                     <MapPin className="w-3.5 h-3.5 text-[#C5A059]" />
-                    <span>Ver Mapa</span>
+                    <span>{lang === "es" ? "Ver Mapa" : "View Map"}</span>
                   </button>
 
                   {/* Google Calendar */}
@@ -208,7 +214,7 @@ export default function EventsAndMaps() {
                     className="flex items-center gap-2 px-5 py-2.5 rounded-sm bg-[#C5A059] hover:bg-[#B49048] text-white transition-all text-xs font-bold uppercase tracking-widest"
                   >
                     <CalendarPlus className="w-3.5 h-3.5" />
-                    <span>Calendario</span>
+                    <span>{lang === "es" ? "Calendario" : "Calendar"}</span>
                   </a>
                 </div>
               </div>
@@ -222,7 +228,7 @@ export default function EventsAndMaps() {
             <div className="flex items-center gap-2">
               <Landmark className="text-[#C5A059] w-5 h-5" />
               <span className="font-serif text-lg text-[#333] font-light select-none">
-                Mapa Interactivo: {activeMap === "iglesia" ? "Parroquia Santísima Cruz" : "Casa Babilonia"}
+                {lang === "es" ? "Mapa Interactivo:" : "Interactive Map:"} {activeMap === "iglesia" ? "Parroquia Santísima Cruz" : "Casa Babilonia"}
               </span>
             </div>
 
@@ -236,7 +242,7 @@ export default function EventsAndMaps() {
                     : "text-[#777] hover:text-[#333]"
                 }`}
               >
-                Iglesia
+                {lang === "es" ? "Iglesia" : "Church"}
               </button>
               <button
                 onClick={() => setActiveMap("recepcion")}
@@ -246,7 +252,7 @@ export default function EventsAndMaps() {
                     : "text-[#777] hover:text-[#333]"
                 }`}
               >
-                Recepción
+                {lang === "es" ? "Recepción" : "Reception"}
               </button>
             </div>
           </div>
@@ -268,7 +274,7 @@ export default function EventsAndMaps() {
                   allowFullScreen={true}
                   loading="lazy"
                   referrerPolicy="no-referrer"
-                  title="Ubicación Iglesia"
+                  title={lang === "es" ? "Ubicación Iglesia" : "Church Location"}
                 />
               ) : (
                 <motion.iframe
@@ -284,7 +290,7 @@ export default function EventsAndMaps() {
                   allowFullScreen={true}
                   loading="lazy"
                   referrerPolicy="no-referrer"
-                  title="Ubicación Recepción"
+                  title={lang === "es" ? "Ubicación Recepción" : "Reception Location"}
                 />
               )}
             </AnimatePresence>
@@ -299,7 +305,7 @@ export default function EventsAndMaps() {
               className="px-6 py-3 rounded-sm bg-[#333] text-white hover:bg-[#1a1a1a] border border-[#E5E1D8]/30 transition-all text-xs font-bold uppercase tracking-widest flex items-center gap-2 shadow-sm"
             >
               <Compass className="w-4 h-4 text-[#C5A059]" />
-              <span>Abrir en Google Maps / GPS</span>
+              <span>{lang === "es" ? "Abrir en Google Maps / GPS" : "Open in Google Maps / GPS"}</span>
             </a>
           </div>
         </div>

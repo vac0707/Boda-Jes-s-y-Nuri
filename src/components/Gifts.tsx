@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { motion } from "motion/react";
-import { Gift, CreditCard, Clipboard, Check, HelpCircle } from "lucide-react";
+import { Gift, CreditCard, Clipboard, Check } from "lucide-react";
+import { useLanguage } from "../hooks/useLanguage";
 
 export default function Gifts() {
+  const { t, lang } = useLanguage();
   const [copiedAccount, setCopiedAccount] = useState<string | null>(null);
 
   const bcpAccount = "215-98765432-0-89";
@@ -36,14 +38,14 @@ export default function Gifts() {
           >
             <Gift className="w-5 h-5 text-[#C5A059] mb-4" />
             <span className="font-sans text-xs tracking-[0.3em] text-[#8A9A5B] uppercase font-bold">
-              Detalles de Aprecio
+              {t("gifts.label")}
             </span>
             <h2 className="font-serif text-3xl sm:text-5xl text-[#333] tracking-wide font-light mt-3 mb-4">
-              Mesa de Regalos
+              {t("gifts.title")}
             </h2>
             <div className="w-16 h-[1px] bg-[#D4AF37]" />
             <p className="text-[#777] text-sm font-light mt-4 max-w-md">
-              Su presencia en nuestro día de bodas es el regalo más grande. No obstante, si desean realizarnos un obsequio, les brindamos estas opciones:
+              {t("gifts.subtitle")}
             </p>
           </motion.div>
         </div>
@@ -73,15 +75,14 @@ export default function Gifts() {
             </div>
 
             <h3 className="font-serif text-2xl text-[#333] font-normal tracking-wide mb-1">
-              Lluvia de Sobres
+              {t("gifts.envelope_title")}
             </h3>
             <span className="text-[10px] uppercase tracking-[0.25em] text-[#C5A059] font-bold mb-4">
-              Tradición en Efectivo
+              {t("gifts.envelope_subtitle")}
             </span>
             
             <p className="text-[#555] text-xs sm:text-sm font-light leading-relaxed max-w-xs mt-2">
-              Dispondremos de un cofre especial para depositar sus sobres de felicitación y palabras de aliento el día del evento en la recepción de 
-              <strong> Casa Babilonia</strong>.
+              {t("gifts.envelope_desc")}
             </p>
           </motion.div>
 
@@ -100,10 +101,10 @@ export default function Gifts() {
             </div>
 
             <h3 className="font-serif text-2xl text-[#333] font-normal tracking-wide mb-1 text-center">
-              Cuentas Bancarias
+              {t("gifts.bank_title")}
             </h3>
             <span className="text-[10px] uppercase tracking-[0.25em] text-[#8A9A5B] font-bold mb-4 text-center">
-              Transferencia Directa
+              {t("gifts.bank_subtitle")}
             </span>
 
             {/* List of banking accounts */}
@@ -112,13 +113,13 @@ export default function Gifts() {
               <div className="border border-[#E5E1D8] rounded-sm p-4 bg-[#FAF9F6]">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-[10px] font-bold uppercase text-[#333] tracking-widest">
-                    Banco BCP Soles
+                    {lang === "es" ? "Banco BCP Soles" : "BCP Bank (Soles)"}
                   </span>
                   <span className="text-[9px] font-light text-gray-400">Jesús Prado</span>
                 </div>
                 <div className="flex flex-col gap-1 text-xs">
                   <div className="flex items-center justify-between">
-                    <span className="font-light text-gray-500">Nº Cuenta:</span>
+                    <span className="font-light text-gray-500">{lang === "es" ? "Nº Cuenta:" : "Account No:"}</span>
                     <button
                       onClick={() => copyToClipboard(bcpAccount, "bcpAcct")}
                       className="flex items-center gap-1.5 font-mono text-[#333] hover:text-[#C5A059] font-bold transition-all text-[11px] cursor-pointer"
@@ -152,13 +153,13 @@ export default function Gifts() {
               <div className="border border-[#E5E1D8] rounded-sm p-4 bg-[#FAF9F6]">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-[10px] font-bold uppercase text-[#333] tracking-widest">
-                    Interbank Soles
+                    {lang === "es" ? "Interbank Soles" : "Interbank (Soles)"}
                   </span>
                   <span className="text-[9px] font-light text-gray-400">Nuri Aydee</span>
                 </div>
                 <div className="flex flex-col gap-1 text-xs">
                   <div className="flex items-center justify-between">
-                    <span className="font-light text-gray-500">Nº Cuenta:</span>
+                    <span className="font-light text-gray-500">{lang === "es" ? "Nº Cuenta:" : "Account No:"}</span>
                     <button
                       onClick={() => copyToClipboard(interbankAccount, "intAcct")}
                       className="flex items-center gap-1.5 font-mono text-[#333] hover:text-[#C5A059] font-bold transition-all text-[11px] cursor-pointer"

@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Music, FileHeart } from "lucide-react";
+import { useLanguage } from "../hooks/useLanguage";
 
 interface WelcomeScreenProps {
   onOpen: () => void;
 }
 
 export default function WelcomeScreen({ onOpen }: WelcomeScreenProps) {
+  const { t, lang } = useLanguage();
   const groom = "JESÚS MANUEL";
   const bride = "NURI AYDEE";
 
@@ -98,7 +100,7 @@ export default function WelcomeScreen({ onOpen }: WelcomeScreenProps) {
             <div className="absolute inset-[-8px] rounded-full border border-[#C5A059]/5 animate-spin" style={{ animationDuration: "60s", animationDirection: "reverse" }} />
           </div>
           <span className="text-xs uppercase tracking-[0.3em] text-[#C5A059] mt-4 font-semibold italic">
-            Nuestra Unión
+            {t("welcome_screen.union")}
           </span>
         </motion.div>
 
@@ -130,7 +132,9 @@ export default function WelcomeScreen({ onOpen }: WelcomeScreenProps) {
             className="flex items-center justify-center my-4 overflow-visible"
           >
             <div className="w-12 h-[1px] bg-gradient-to-r from-transparent to-gold-400/40" />
-            <span className="font-serif text-3xl text-gold-300 font-light italic mx-4">y</span>
+            <span className="font-serif text-3xl text-gold-300 font-light italic mx-4">
+              {lang === "es" ? "y" : "and"}
+            </span>
             <div className="w-12 h-[1px] bg-gradient-to-l from-transparent to-gold-400/40" />
           </motion.div>
 
@@ -159,7 +163,7 @@ export default function WelcomeScreen({ onOpen }: WelcomeScreenProps) {
             transition={{ delay: 2.2, duration: 1.5 }}
             className="text-gold-200 font-light tracking-[0.2em] text-xs sm:text-sm mt-6 uppercase"
           >
-            05 de Septiembre de 2026
+            {t("welcome_screen.september_date")}
           </motion.p>
         </div>
 
@@ -173,7 +177,7 @@ export default function WelcomeScreen({ onOpen }: WelcomeScreenProps) {
           {/* Subtle note about music */}
           <div className="flex items-center gap-2 text-[#C5A059]/80 text-[10px] uppercase tracking-widest mb-4">
             <Music className="w-3.5 h-3.5" />
-            <span className="font-light">Incluye música de fondo</span>
+            <span className="font-light">{t("welcome_screen.with_music")}</span>
           </div>
 
           <button
@@ -187,7 +191,7 @@ export default function WelcomeScreen({ onOpen }: WelcomeScreenProps) {
             {/* Main elegant button */}
             <div className="relative flex items-center justify-center gap-3 px-10 py-4 rounded-sm border border-[#D4AF37]/40 bg-[#C5A059] hover:bg-[#B49048] text-white font-sans text-xs tracking-[0.25em] uppercase font-bold transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] shadow-lg">
               <FileHeart className="w-4 h-4 text-white" />
-              <span>Abrir Invitación</span>
+              <span>{t("welcome_screen.open_btn")}</span>
             </div>
           </button>
         </motion.div>

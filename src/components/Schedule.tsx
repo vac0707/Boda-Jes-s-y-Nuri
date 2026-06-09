@@ -1,42 +1,45 @@
 import { motion } from "motion/react";
 import { ScheduleEvent } from "../types";
 import { Church, GlassWater, Utensils, Award, Music4, FlameKindling } from "lucide-react";
+import { useLanguage } from "../hooks/useLanguage";
 
 export default function Schedule() {
+  const { t, lang } = useLanguage();
+
   const scheduleEvents: ScheduleEvent[] = [
     {
       id: "1",
       time: "12:00 PM",
-      title: "Ceremonia Religiosa",
-      description: "El solemne encuentro espiritual en la Parroquia Santísima Cruz. El juramento eterno de amor y entrega sagrada.",
+      title: t("schedule.event_1_title"),
+      description: t("schedule.event_1_desc"),
       icon: "church",
     },
     {
       id: "2",
       time: "02:00 PM",
-      title: "Recepción",
-      description: "Ingreso de los distinguidos invitados y esposos a la majestuosa Casa Babilonia para la copa inicial de bienvenida.",
+      title: t("schedule.event_2_title"),
+      description: t("schedule.event_2_desc"),
       icon: "reception",
     },
     {
       id: "3",
       time: "03:00 PM",
-      title: "Almuerzo de Bodas",
-      description: "Un recorrido gastronómico gourmet especialmente preparado para homenajear a nuestros familiares y amigos más cercanos.",
+      title: t("schedule.event_3_title"),
+      description: t("schedule.event_3_desc"),
       icon: "lunch",
     },
     {
       id: "4",
       time: "05:00 PM",
-      title: "El Brindis de Honor",
-      description: "Palabras sinceras de agradecimiento de parte de los consagrados novios y padres de familia del evento.",
+      title: t("schedule.event_4_title"),
+      description: t("schedule.event_4_desc"),
       icon: "toast",
     },
     {
       id: "5",
       time: "08:00 PM",
-      title: "La Gran Fiesta civil",
-      description: "Apertura formal de la pista de baile, luces, cotillón exclusivo y diversión sin fronteras para festejar nuestro matrimonio.",
+      title: t("schedule.event_5_title"),
+      description: t("schedule.event_5_desc"),
       icon: "party",
     },
   ];
@@ -74,14 +77,14 @@ export default function Schedule() {
           >
             <StarsIcon />
             <span className="font-sans text-xs tracking-[0.3em] text-[#8A9A5B] uppercase font-bold">
-              Protocolo
+              {t("schedule.label")}
             </span>
             <h2 className="font-serif text-3xl sm:text-5xl text-[#333] tracking-wide font-light mt-3 mb-4">
-              Cronograma del Evento
+              {t("schedule.title")}
             </h2>
             <div className="w-16 h-[1px] bg-[#D4AF37]" />
             <p className="text-[#777] text-sm font-light italic mt-6 max-w-sm">
-              Cada instante de nuestro día mágico está planeado para gozar de tu grata calidez y felicidad.
+              {t("schedule.subtitle")}
             </p>
           </motion.div>
         </div>

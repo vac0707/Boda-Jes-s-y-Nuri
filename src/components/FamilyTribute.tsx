@@ -1,7 +1,9 @@
 import { motion } from "motion/react";
 import { Heart, Users, Star } from "lucide-react";
+import { useLanguage } from "../hooks/useLanguage";
 
 export default function FamilyTribute() {
+  const { t } = useLanguage();
   return (
     <section id="cortejo-familia" className="relative py-28 px-6 bg-[#FAF9F6] overflow-hidden text-center">
       <div className="absolute top-0 inset-x-0 h-px bg-[#E5E1D8]" />
@@ -18,14 +20,14 @@ export default function FamilyTribute() {
           >
             <Users className="w-5 h-5 text-[#C5A059] mb-4" />
             <span className="font-sans text-xs tracking-[0.3em] text-[#8A9A5B] uppercase font-bold">
-              Con la Bendición de Dios
+              {t("family.blessing")}
             </span>
             <h2 className="font-serif text-3xl sm:text-5xl text-[#333] tracking-wide font-light mt-3 mb-4">
-              Nuestras Familias
+              {t("family.title")}
             </h2>
             <div className="w-16 h-[1px] bg-[#D4AF37]" />
             <p className="text-[#777] text-sm font-light italic mt-6 max-w-lg">
-              "Hoy honramos a quienes nos guiaron con amor incondicional, templanza y devota fe en nuestro camino."
+              {t("family.quote")}
             </p>
           </motion.div>
         </div>
@@ -47,7 +49,7 @@ export default function FamilyTribute() {
                 <Heart className="w-5 h-5 fill-[#C5A059]/10" />
               </div>
               <span className="text-[10px] uppercase tracking-[0.25em] text-[#8A9A5B] font-bold mb-3 block">
-                Padres de la Novia
+                {t("family.bride_parents")}
               </span>
               <div className="w-8 h-[1px] bg-[#E5E1D8] mb-4" />
               
@@ -77,7 +79,7 @@ export default function FamilyTribute() {
                 <Star className="w-5 h-5 fill-[#D4AF37]/25" />
               </div>
               <span className="text-[10px] uppercase tracking-[0.25em] text-[#D4AF37] font-bold mb-3 block">
-                Los Padrinos
+                {t("family.godparents")}
               </span>
               <div className="w-8 h-[1px] bg-[#D4AF37]/30 mb-4" />
               
@@ -107,7 +109,7 @@ export default function FamilyTribute() {
                 <Heart className="w-5 h-5 fill-[#C5A059]/10" />
               </div>
               <span className="text-[10px] uppercase tracking-[0.25em] text-[#8A9A5B] font-bold mb-3 block">
-                Padres del Novio
+                {t("family.groom_parents")}
               </span>
               <div className="w-8 h-[1px] bg-[#E5E1D8] mb-4" />
               
